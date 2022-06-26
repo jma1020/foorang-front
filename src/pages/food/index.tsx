@@ -5,3 +5,4 @@ const Food: NextPage = () => {
 };
 
 export default Food;
+Food;
