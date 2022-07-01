@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { NextPage } from "next";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
+import AuthBtn from "src/components/auth/AuthBtn";
+import { useForm } from "react-hook-form";
 
 interface ProfileImgStyle {
   img: any;
@@ -25,7 +27,8 @@ const ProfilePage: NextPage = () => {
         <ProfileImg htmlFor="img" img={mainImg} />
         <ImageInput type="file" id="img" onChange={uploadToClient} />
       </Box>
-      <NickNameInput></NickNameInput>
+      <NickNameInput placeholder="닉네임을 입력해주세요"></NickNameInput>
+      <AuthBtn>프로필 설정 완료</AuthBtn>
     </AuthLayout>
   );
 };
@@ -79,6 +82,7 @@ const NickNameInput = styled.input`
   padding: 10px 10px;
   border: 1px solid #f6510b;
   border-radius: 6px;
+  margin-bottom: 200px;
 `;
 
 export default ProfilePage;

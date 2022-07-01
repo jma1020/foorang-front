@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import React from "react";
 
 interface AuthBtnProps {
-  icon: boolean;
+  icon?: boolean;
   children: React.ReactNode;
 }
 interface AuthBtnStyle {
-  icon: boolean;
+  icon?: boolean;
 }
 
 function AuthBtn({ icon, children }: AuthBtnProps) {

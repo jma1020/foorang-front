@@ -30,7 +30,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0 1.5rem;
   background-color: #ffffff;
-  border: 1px solid black;
+
   border-radius: 1rem;
   @media (min-width: 768px) {
     padding: 2.5rem;
