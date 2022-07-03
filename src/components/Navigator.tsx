@@ -48,6 +48,7 @@ const Wrap = styled.nav`
   padding: 15px 20px 25px 20px;
   width: 100%;
   height: 105px;
+  background-color: #fff;
   bottom: -10px;
   border-radius: 5px;
   box-shadow: -3px -3px 4px 0px rgba(0, 0, 0, 0.1);
@@ -62,9 +63,10 @@ const Wrap = styled.nav`
 `;
 const Item = styled.a<{ name: string; here: boolean }>`
   display: block;
-  padding: 35px 0 0 0;
+  padding: 32px 0 0 0;
   background-image: ${(prop) =>
     `url(/icons/nav_${prop.name}_${prop.here ? "color" : "line"}.svg)`};
+  background-size: 28px;
   background-repeat: no-repeat;
   background-position: top center;
   color: ${(prop) => (prop.here ? COLOR.main : "none")};
