@@ -18,7 +18,10 @@ const Button = styled.button<AuthBtnStyle>`
   display: block;
   position: relative;
   width: 100%;
-  padding: 18px 116px;
+  @media (min-width: 768px) {
+    padding: 18px 116px;
+  }
+  padding: 18px 100px;
   border-radius: 6px;
   background-color: #fee500;
   font-size: 20px;
