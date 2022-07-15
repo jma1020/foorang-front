@@ -24,14 +24,4 @@ const ReduxTestPage: NextPage<ReduxTestPageProps> = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res, ...ets }) => {
-      store.dispatch(increment());
-      const counter = store.getState().exampleCounter.counter;
-      console.log(counter);
-      return { props: {} };
-    },
-);
-
 export default ReduxTestPage;
