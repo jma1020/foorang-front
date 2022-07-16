@@ -5,9 +5,22 @@ import SettingIcon from "public/images/settingIcon.svg";
 import { useState } from "react";
 import BookMark from "src/components/myPage/BookMarkContainer";
 import Review from "src/components/myPage/ReviewContainer";
+import { css } from "@emotion/react";
 
 const Mypage: NextPage = () => {
-  const [toggle, setToggle] = useState(false);
+  const [bookMarkToggle, setbookMarkToggle] = useState(true);
+  const [reviewToggle, setreviewToggle] = useState(false);
+
+  const onBookMark = () => {
+    setbookMarkToggle(true);
+    setreviewToggle(false);
+  };
+
+  const onReview = () => {
+    setbookMarkToggle(false);
+    setreviewToggle(true);
+  };
+
   return (
     <div>
       <SettingContainer>
@@ -21,10 +34,15 @@ const Mypage: NextPage = () => {
         </ProfileContainer>
       </TopContainer>
       <TapContainer>
-        <TapBookMark>북마크</TapBookMark>
-        <TapReview>리뷰</TapReview>
+        <TapBookMark onClick={onBookMark} active={bookMarkToggle}>
+          북마크
+        </TapBookMark>
+        <TapReview onClick={onReview} active={reviewToggle}>
+          리뷰
+        </TapReview>
       </TapContainer>
-      {toggle ? <BookMark /> : <Review />}
+      {bookMarkToggle && <BookMark />}
+      {reviewToggle && <Review />}
       <Navigator />
     </div>
   );
@@ -32,6 +50,10 @@ const Mypage: NextPage = () => {
 
 interface StyledImgProps {
   img: string;
+}
+
+interface activeProps {
+  active: boolean;
 }
 
 const Section = styled.section``;
@@ -81,17 +103,29 @@ const TapContainer = styled.div`
   display: flex;
   color: rgba(0, 0, 0, 0.3);
   text-align: center;
+  cursor: pointer;
 `;
 
-const TapBookMark = styled.div`
+const TapBookMark = styled.div<activeProps>`
   flex-grow: 1;
-  border-bottom: 2px solid #f7510b;
+  box-sizing: border-box;
+  ${({ active }) =>
+    active &&
+    css`
+      border-bottom: 2px solid #f7510b;
+      color: #f7510b;
+    `}
   padding-bottom: 0.75rem;
 `;
 
-const TapReview = styled.div`
+const TapReview = styled.div<activeProps>`
   flex-grow: 1;
-  border-bottom: 2px solid #f7510b;
+  ${({ active }) =>
+    active &&
+    css`
+      border-bottom: 2px solid #f7510b;
+      color: #f7510b;
+    `}
   padding-bottom: 0.75rem;
 `;
 
