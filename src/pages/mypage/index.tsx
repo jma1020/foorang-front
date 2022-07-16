@@ -3,38 +3,58 @@ import type { NextPage } from "next";
 import Navigator from "../../components/Navigator";
 import SettingIcon from "public/images/settingIcon.svg";
 import { useState } from "react";
+import BookMark from "src/components/myPage/BookMarkContainer";
+import Review from "src/components/myPage/ReviewContainer";
+import { css } from "@emotion/react";
 
 const Mypage: NextPage = () => {
-  const [toggle, setToggle] = useState(true);
+  const [bookMarkToggle, setbookMarkToggle] = useState(true);
+  const [reviewToggle, setreviewToggle] = useState(false);
+
+  const onBookMark = () => {
+    setbookMarkToggle(true);
+    setreviewToggle(false);
+  };
+
+  const onReview = () => {
+    setbookMarkToggle(false);
+    setreviewToggle(true);
+  };
+
   return (
     <div>
       <SettingContainer>
         <SettingIcon />
       </SettingContainer>
-      <Title>내 정보</Title>
-      <ProfileContainer>
-        <ProfileImg />
-        <ProfileNickName>jma1020</ProfileNickName>
-      </ProfileContainer>
+      <TopContainer>
+        <Title>내 정보</Title>
+        <ProfileContainer>
+          <ProfileImg img="https://i.pinimg.com/236x/e2/b7/da/e2b7da6bc749ba2d7ebdfda28fac6009.jpg" />
+          <ProfileNickName>jma1020</ProfileNickName>
+        </ProfileContainer>
+      </TopContainer>
       <TapContainer>
-        <TapBookMark>북마크</TapBookMark>
-        <TapReview>리뷰</TapReview>
+        <TapBookMark onClick={onBookMark} active={bookMarkToggle}>
+          북마크
+        </TapBookMark>
+        <TapReview onClick={onReview} active={reviewToggle}>
+          리뷰
+        </TapReview>
       </TapContainer>
-      {toggle ? (
-        <BookMarkContainer>
-          <BookMarkImg />
-          <BookMarkStoreName>카페 허니비</BookMarkStoreName>
-          <BookMarkCategory>디저트 음료</BookMarkCategory>
-          <BookMarkStarBox />
-          <BookMarkDescription>달콤한 허니비 한잔 어때요?</BookMarkDescription>
-        </BookMarkContainer>
-      ) : (
-        <ReviewContainer></ReviewContainer>
-      )}
+      {bookMarkToggle && <BookMark />}
+      {reviewToggle && <Review />}
       <Navigator />
     </div>
   );
 };
+
+interface StyledImgProps {
+  img: string;
+}
+
+interface activeProps {
+  active: boolean;
+}
 
 const Section = styled.section``;
 
@@ -44,44 +64,69 @@ const SettingContainer = styled.div`
   margin: 22px;
 `;
 
-const Title = styled.h2``;
+const TopContainer = styled.div`
+  margin: 0px 1.375rem 2.5rem;
+`;
 
-const ProfileContainer = styled.div``;
+const Title = styled.h2`
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.75rem;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  &::after {
+    content: "화살";
+    position: absolute;
+    right: 0;
+  }
+`;
 // 아이콘은 여기서 after 요소로
-const ProfileImg = styled.div``;
+const ProfileImg = styled.div<StyledImgProps>`
+  width: 5rem;
+  height: 5rem;
+  background-image: url(${(props) => props.img});
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border-radius: 0.375rem;
+  margin-right: 1.25rem;
+`;
 
-const ProfileNickName = styled.p``;
+const ProfileNickName = styled.p`
+  font-weight: 600;
+`;
 
-const TapContainer = styled.div``;
+const TapContainer = styled.div`
+  display: flex;
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  cursor: pointer;
+`;
 
-const TapBookMark = styled.div``;
+const TapBookMark = styled.div<activeProps>`
+  flex-grow: 1;
+  box-sizing: border-box;
+  ${({ active }) =>
+    active &&
+    css`
+      border-bottom: 2px solid #f7510b;
+      color: #f7510b;
+    `}
+  padding-bottom: 0.75rem;
+`;
 
-const TapReview = styled.div``;
-
-const BookMarkContainer = styled.div``;
-
-const BookMarkImg = styled.div``;
-
-const BookMarkStoreName = styled.h3``;
-
-const BookMarkCategory = styled.em``;
-
-const BookMarkStarBox = styled.div``;
-
-const BookMarkDescription = styled.p``;
-
-const ReviewContainer = styled.div``;
-
-const ReviewStoreName = styled.h3``;
-
-const ReviewCategory = styled.em``;
-
-const ReviewStarBox = styled.div``;
-
-const ReviewImg = styled.div``;
-
-const ReviewTitle = styled.h3``;
-
-const ReviewDescription = styled.p``;
+const TapReview = styled.div<activeProps>`
+  flex-grow: 1;
+  ${({ active }) =>
+    active &&
+    css`
+      border-bottom: 2px solid #f7510b;
+      color: #f7510b;
+    `}
+  padding-bottom: 0.75rem;
+`;
 
 export default Mypage;
