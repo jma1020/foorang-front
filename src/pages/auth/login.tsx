@@ -1,10 +1,57 @@
 import styled from "@emotion/styled";
+import axios from "axios";
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect } from "react";
 import AuthBtn from "src/components/auth/AuthBtn";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
 
 const LoginPage: NextPage = () => {
+  const getKakaoTokenHandler = async (code: string) => {
+    const data: any = {
+      grant_type: "authorization_code",
+      client_id: "cc6ec2dfa54d34910dfd13c1a55c8d46",
+      redirect_uri: "http://localhost:3000/auth/login",
+      code: code,
+    };
+    const queryString = Object.keys(data)
+      .map(
+        (k: any) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]),
+      )
+      .join("&");
+
+    //토큰 발급 REST API
+    axios
+      .post("https://kauth.kakao.com/oauth/token", queryString, {
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+      })
+      .then((res) => {
+        //서버에 토큰 전송
+        console.log(res);
+      });
+  };
+
+  useEffect(() => {
+    const param = window.history.state.as.split("?")[1];
+    const query = {
+      code: param?.split("=")[1],
+    };
+    console.log(query.code);
+
+    // const data = {
+    //   grant_type: "authorization_code",
+    //   client_id: "cc6ec2dfa54d34910dfd13c1a55c8d46",
+    //   redirect_uri: "https://www.naver.com/",
+    //   code: query.code,
+    // };
+    if (query.code) {
+      getKakaoTokenHandler(query.code.toString());
+    }
+  }, []);
+
   return (
     <AuthLayout>
       <LoginSection>
@@ -24,9 +71,19 @@ const LoginPage: NextPage = () => {
           />
           {/* </LoginImgBox> */}
           <Hr />
-          <AuthBtn icon>
-            <p>카카오 로그인</p>
-          </AuthBtn>
+          <Link
+            href={
+              "https://kauth.kakao.com/oauth/authorize?client_id=cc6ec2dfa54d34910dfd13c1a55c8d46&redirect_uri=http://localhost:3000/auth/login&response_type=code"
+            }
+          >
+            <a>
+              <div>
+                <AuthBtn icon>
+                  <p>카카오 로그인</p>
+                </AuthBtn>
+              </div>
+            </a>
+          </Link>
         </div>
       </LoginSection>
     </AuthLayout>
