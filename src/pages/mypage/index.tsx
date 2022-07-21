@@ -6,6 +6,7 @@ import { useState } from "react";
 import BookMark from "src/components/myPage/BookMarkContainer";
 import Review from "src/components/myPage/ReviewContainer";
 import { css } from "@emotion/react";
+import RightArrowSVG from "src/components/myPage/RightArrowSVG";
 
 const Mypage: NextPage = () => {
   const [bookMarkToggle, setbookMarkToggle] = useState(true);
@@ -22,7 +23,7 @@ const Mypage: NextPage = () => {
   };
 
   return (
-    <div>
+    <Section>
       <SettingContainer>
         <SettingIcon />
       </SettingContainer>
@@ -31,6 +32,7 @@ const Mypage: NextPage = () => {
         <ProfileContainer>
           <ProfileImg img="https://i.pinimg.com/236x/e2/b7/da/e2b7da6bc749ba2d7ebdfda28fac6009.jpg" />
           <ProfileNickName>jma1020</ProfileNickName>
+          <RightArrowSVG colorScheme="gray" />
         </ProfileContainer>
       </TopContainer>
       <TapContainer>
@@ -44,7 +46,7 @@ const Mypage: NextPage = () => {
       {bookMarkToggle && <BookMark />}
       {reviewToggle && <Review />}
       <Navigator />
-    </div>
+    </Section>
   );
 };
 
@@ -78,11 +80,6 @@ const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  &::after {
-    content: "화살";
-    position: absolute;
-    right: 0;
-  }
 `;
 // 아이콘은 여기서 after 요소로
 const ProfileImg = styled.div<StyledImgProps>`

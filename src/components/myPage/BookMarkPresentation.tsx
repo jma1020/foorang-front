@@ -1,4 +1,5 @@
 import * as Styled from "./BookMark.Styled";
+import RightArrowSVG from "./RightArrowSVG";
 
 const BookMarkPersentation = () => {
   return (
@@ -12,6 +13,7 @@ const BookMarkPersentation = () => {
           달콤한 허니비 한잔 어때요?
         </Styled.BookMarkDescription>
       </Styled.BookMarkTextContainer>
+      <RightArrowSVG />
     </Styled.BookMarkContainer>
   );
 };
