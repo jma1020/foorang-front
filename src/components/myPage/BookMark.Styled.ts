@@ -6,15 +6,15 @@ interface StyledImgProps {
 
 export const BookMarkContainer = styled.div`
   display: flex;
-  padding: 2.125rem 1.375rem;
+  margin: 2.125rem 1.375rem;
   position: relative;
-  &::after {
+  /* &::after {
     content: "화살";
     position: absolute;
     top: 0;
     right: 0;
     transform: translate(-2.125rem, 2.375rem);
-  }
+  } */
 `;
 
 export const BookMarkImg = styled.div<StyledImgProps>`
