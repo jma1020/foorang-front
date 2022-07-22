@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { NextPage } from "next";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -17,12 +16,5 @@ const ModalPage: NextPage = () => {
     </>
   );
 };
-
-const Button = styled.button`
-  background-color: yellow;
-  padding: 10px;
-  border-radius: 10px;
-  margin-right: 10px;
-`;
 
 export default ModalPage;
