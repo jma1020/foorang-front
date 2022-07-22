@@ -13,8 +13,6 @@ const ModalPage: NextPage = () => {
       <button onClick={() => dispatch(open())}>버튼 클릭 시 Modal 오픈 </button>
       <Modal>
         <h1>모달 창 on</h1>
-        <Button>닫기</Button>
-        <Button>열기</Button>
       </Modal>
     </>
   );
